@@ -14,38 +14,40 @@ bool is_number(std::string& expr)
     return true;
 }
 
-std::vector<std::string> lexer(std::string line)
+std::vector<std::string> *lexer(std::string line)
 {
-    auto *tokens = new std::vector<std::string>();
+    std::vector<std::string> *tokens = new std::vector<std::string>();
     std::string token;
     for (unsigned i = 0; line[i] != '\0'; ++i)
     {
         if (line[i] == ' ')
         {
-            tokens.push_back(token);
+            tokens->push_back(token);
             token.clear();
             continue;
         }
-        token.append(line[i]);
+        token.push_back(line[i]);
     }
+    tokens->push_back(token);
     return tokens;
 }
 
-int parsing(std::vector<std::string> tokens)
+int parsing(std::vector<std::string> *tokens)
 {
     std::string token;
-    std::vector<std::string>::iterator it = tokens.begin();
-    for(unsigned i = 0; it != tokens.end(); ++i, ++it)
+    std::vector<std::string>::iterator it = tokens->begin();
+    for(unsigned i = 0; it != tokens->end(); ++i, ++it)
     {
-        cout << *it << "\n";
-
-        /*
-        if (is_number(tokens[i]))
+        if (is_number(*it))
         {
-            std::cout << *it << "\n";
+            std::cout << *it << " (number)\n";
         }
-        */
+        else
+        {
+            std::cout << *it << " (operator)\n";
+        }
     }
+    delete tokens;
     return 0;
 }
 
@@ -65,7 +67,8 @@ void tty(void)
         {
             return;
         }
-        std::cout << compute(line) << "\n";
+        compute(line);
+        //DISPLAY FINAL RESULT: std::cout << compute(line) << "\n";
     }
 }
 
