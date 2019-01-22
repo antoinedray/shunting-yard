@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 project(bistro LANGUAGES CXX)
 
-add_executable(bistro src/main.cc)
+add_executable(bistro src/main.cc src/shunting-yard.cc)
 
 set(CMAKE_BUILD_TYPE Debug)
 
