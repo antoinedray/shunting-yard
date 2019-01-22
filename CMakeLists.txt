@@ -8,4 +8,4 @@ set(CMAKE_BUILD_TYPE Debug)
 
 include_directories(src)
 
-add_definitions(-g -Wall -Werror -Wextra -pedantic -std=c99)
+add_definitions(-g -Wall -Werror -Wextra -pedantic -std=c++17)
