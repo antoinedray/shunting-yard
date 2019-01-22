@@ -1,5 +1,5 @@
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <vector>
 
 bool is_number(std::string& expr)
@@ -14,9 +14,9 @@ bool is_number(std::string& expr)
     return true;
 }
 
-std::vector<std::string> *lexer(std::string line)
+std::vector<std::string>* lexer(std::string line)
 {
-    std::vector<std::string> *tokens = new std::vector<std::string>();
+    std::vector<std::string>* tokens = new std::vector<std::string>();
     std::string token;
     for (unsigned i = 0; line[i] != '\0'; ++i)
     {
@@ -32,18 +32,19 @@ std::vector<std::string> *lexer(std::string line)
     return tokens;
 }
 
-int parsing(std::vector<std::string> *tokens)
+int parsing(std::vector<std::string>* tokens)
 {
     std::string token;
     std::vector<std::string>::iterator it = tokens->begin();
-    for(unsigned i = 0; it != tokens->end(); ++i, ++it)
+    std::vector<std::string>* op_stack = new std::vector<std::string>{};
+    for (unsigned i = 0; it != tokens->end(); ++i, ++it)
     {
         if (is_number(*it))
         {
             std::cout << *it << " (number)\n";
-        }
-        else
+        } else
         {
+            op_stack->push_back(*it);
             std::cout << *it << " (operator)\n";
         }
     }
@@ -68,7 +69,7 @@ void tty(void)
             return;
         }
         compute(line);
-        //DISPLAY FINAL RESULT: std::cout << compute(line) << "\n";
+        // DISPLAY FINAL RESULT: std::cout << compute(line) << "\n";
     }
 }
 
