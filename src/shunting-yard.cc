@@ -29,6 +29,21 @@ int applyOp(int a, int b, char op)
     return 0;
 }
 
+int get_number(Lex& str, char c)
+{
+    int val = 0;
+    while (!str.at_end() && isdigit(c))
+    {
+        val = (val * 10) + (c - '0');
+        c = str.eat_tkn();
+    }
+    if (!isdigit(c))
+    {
+        str.undo();
+    }
+    return val;
+}
+
 int parsing(Lex& str)
 {
     char c;
@@ -47,17 +62,7 @@ int parsing(Lex& str)
             ops.push_back(c);
         } else if (isdigit(c))
         {
-            int val = 0;
-            while (!str.at_end() && isdigit(c))
-            {
-                val = (val * 10) + (c - '0');
-                c = str.eat_tkn();
-            }
-            if (!isdigit(c))
-            {
-                str.undo();
-            }
-            values.push_back(val);
+            values.push_back(get_number(str, c));
         } else if (c == ')')
         {
             while (!ops.empty() && ops.back() != '(')
