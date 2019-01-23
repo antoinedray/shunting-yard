@@ -14,7 +14,7 @@ public:
     {}
     char eat_tkn()
     {
-        return expr_[curs_++];
+        return expr_[curs_];
     }
     bool at_end()
     {
@@ -23,6 +23,10 @@ public:
     void undo()
     {
         curs_--;
+    }
+    void inc_curs()
+    {
+        curs_++;
     }
 
 private:
