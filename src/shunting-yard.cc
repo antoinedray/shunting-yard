@@ -31,7 +31,9 @@ int applyOp(int a, int b, char op)
 
 int get_number(Lex& str, char c)
 {
-    int val = 0;
+    int val = c - '0';
+    str.inc_curs();
+    c = str.eat_tkn();
     while (!str.at_end() && isdigit(c))
     {
         val = (val * 10) + (c - '0');
@@ -50,7 +52,7 @@ int parsing(Lex& str)
     std::vector<int> values;
     std::vector<char> ops;
 
-    while (!str.at_end())
+    for (;!str.at_end(); str.inc_curs())
     {
         c = str.eat_tkn();
 
