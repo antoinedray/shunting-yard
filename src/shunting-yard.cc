@@ -13,7 +13,7 @@ int precedence(char op)
     return 0;
 }
 
-int applyOp(int a, int b, char op)
+int apply_op(int a, int b, char op)
 {
     switch (op)
     {
@@ -52,7 +52,7 @@ int parsing(Lex& str)
     std::vector<int> values;
     std::vector<char> ops;
 
-    for (;!str.at_end(); str.inc_curs())
+    for (; !str.at_end(); str.inc_curs())
     {
         c = str.eat_tkn();
 
@@ -78,7 +78,7 @@ int parsing(Lex& str)
                 char op = ops.back();
                 ops.pop_back();
 
-                values.push_back(applyOp(val1, val2, op));
+                values.push_back(apply_op(val1, val2, op));
             }
             ops.pop_back();
         } else
@@ -94,7 +94,7 @@ int parsing(Lex& str)
                 char op = ops.back();
                 ops.pop_back();
 
-                values.push_back(applyOp(val1, val2, op));
+                values.push_back(apply_op(val1, val2, op));
             }
             ops.push_back(c);
         }
@@ -110,7 +110,7 @@ int parsing(Lex& str)
         char op = ops.back();
         ops.pop_back();
 
-        values.push_back(applyOp(val1, val2, op));
+        values.push_back(apply_op(val1, val2, op));
     }
     return values.back();
 }

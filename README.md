@@ -1,2 +1,2 @@
 # Shunting Yard
-An implementation of the shunting yard in C++
+An implementation of the shunting yard algorithm in C++
