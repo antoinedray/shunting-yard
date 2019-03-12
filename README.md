@@ -1,5 +1,5 @@
-# Shunting Yard
-An implementation of the shunting yard algorithm in C++
+# Shunting Yard Calculator
+A simple calculator implementing the shunting yard algorithm in C++
 
 ### How to run me
 ```
